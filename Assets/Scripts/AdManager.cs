@@ -7,13 +7,13 @@ public class AdManager : MonoBehaviour
 {
     public static AdManager Instance;
 
-    private string appID = "ca-app-pub-5427174806272358~4537092066"; //"ca-app-pub-3940256099942544~3347511713"; Tesdid
+    private string appID = "";//"ca-app-pub-5427174806272358~4537092066"; //"ca-app-pub-3940256099942544~3347511713"; Tesdid
 
     private BannerView bannerView;
-    private string bannerID = "ca-app-pub-5427174806272358/1538629290"; //"ca-app-pub-3940256099942544/6300978111";
+    private string bannerID = ""; //"ca-app-pub-5427174806272358/1538629290"; //"ca-app-pub-3940256099942544/6300978111";
 
     private InterstitialAd fullScreenAd;
-    private string fullScreenAdID = "ca-app-pub-5427174806272358/9772342530"; //"ca-app-pub-3940256099942544/1033173712";
+    private string fullScreenAdID = "";//"ca-app-pub-5427174806272358/9772342530"; //"ca-app-pub-3940256099942544/1033173712";
     private void Awake()
     {
         if(Instance == null)

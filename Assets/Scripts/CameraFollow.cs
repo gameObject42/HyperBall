@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+
+    //8,9.5,-9    13,-18
     public Transform target;
     private Vector3 offset;
 

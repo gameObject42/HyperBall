@@ -8,11 +8,14 @@ public class Player : MonoBehaviour
     public float Speed;
     public float acc;
     public float topSpeed;
-    public float jumpForce;
+    public float jumpHeight;
     public float touchSpeed = 0.01f;
-    private Rigidbody rigid;
-    private Touch touchInput;
+    public float gravity;
 
+
+    //private Rigidbody rigid;
+    private Touch touchInput;
+    private float VelocityY;
     public AudioSource hitaudio;
     public AudioClip hit;
 
@@ -21,15 +24,17 @@ public class Player : MonoBehaviour
 
     private bool isDead = false;
 
+    private CharacterController controller;
+
     private void Start()
     {
-        rigid = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
+        //rigid = GetComponent<Rigidbody>();
         tween = FindObjectOfType<Tweening>();
         ColorCha = FindObjectOfType<ColorChanger>();
     }
     private void Update()
     {
-        
         if (transform.position.y < -2)
         {
             isDead = true;
@@ -49,7 +54,16 @@ public class Player : MonoBehaviour
     }
     private void PlayerMovement()
     {
-        transform.Translate(Vector3.forward * Speed * Time.fixedDeltaTime);
+        VelocityY += Time.deltaTime * gravity;
+        Vector3 velocity = transform.forward * Speed + Vector3.up * VelocityY;
+        controller.Move(velocity * Time.deltaTime);
+        //Debug.Log(controller.isGrounded);
+
+        //transform.Translate(Vector3.forward * Speed * Time.fixedDeltaTime);
+        if (controller.isGrounded)
+        {
+            VelocityY = 0;
+        }
         if (Input.touchCount > 0)
         {
             touchInput = Input.GetTouch(0);
@@ -64,15 +78,20 @@ public class Player : MonoBehaviour
             Speed += Time.deltaTime + acc;
         }
         transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * 10 * Time.fixedDeltaTime);
-        if (Input.GetKey(KeyCode.Space))
+
+        /*if (Input.GetKey(KeyCode.Space))
         {
-            rigid.AddForce(Vector3.up * jumpForce);
-        }
+            if (controller.isGrounded)
+            {
+                float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
+                VelocityY = jumpVelocity;
+            }
+        }*/
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Obstacle")
+        if (other.gameObject.tag == "Obstacles")
         {
             //GameManager.Instance.gameOverMenu.SetActive(true);
             GameManager.Instance.startGame = false;
@@ -91,11 +110,15 @@ public class Player : MonoBehaviour
         {
             ColorCha.ChangeColor();
         }
-        /*else if (other.gameObject.tag == "JumpPoint")
+        else if (other.gameObject.tag == "JumpPoint")
         {
-            rigid.velocity += Vector3.up * jumpForce;
+            if (controller.isGrounded)
+            {
+                float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
+                VelocityY = jumpVelocity;
+            }
         }
-        else if (other.gameObject.tag == "JumpDown")
+        /*else if (other.gameObject.tag == "JumpDown")
         {
             rigid.velocity += Vector3.down * jumpForce;
         }*/
