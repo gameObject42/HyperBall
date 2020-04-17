@@ -6,7 +6,8 @@ public class CameraFollow : MonoBehaviour
 {
 
     //8,9.5,-9    13,-18
-    public Transform target;
+    //public GameObject player;
+    private Transform player;
     private Vector3 offset;
 
     [Range(0.0f,100.0f)]
@@ -16,17 +17,29 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        offset = transform.position - target.position;
+        Invoke("Checks", 1.0f);
+        
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 newPos = target.position + offset;
-        transform.position = Vector3.Slerp(transform.position, newPos, smoothNes);
-        if (lookAtPlayer)
+        if(player != null)
         {
-            transform.LookAt(target);
+            Vector3 newPos = player.position + offset;
+            transform.position = Vector3.Slerp(transform.position, newPos, smoothNes);
+            if (lookAtPlayer)
+            {
+                transform.LookAt(player);
+            }
+        }
+    }
+    public void Checks()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            offset = transform.position - player.position;
         }
     }
 }

@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
     private CharacterController controller;
 
+    private Vector3 target = new Vector3(0.0f, 0.0f, 0.0f);
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour
             tween.PauseAnim();
             GameManager.Instance.Save();
             hitaudio.PlayOneShot(hit);
-            GameManager.Instance.Player.SetActive(false);
+            //GameManager.Instance.Player.SetActive(false);
             AdManager.Instance.RequestBanner();
         }
     }
@@ -55,9 +56,9 @@ public class Player : MonoBehaviour
     private void PlayerMovement()
     {
         VelocityY += Time.deltaTime * gravity;
-        Vector3 velocity = transform.forward * Speed + Vector3.up * VelocityY;
+        Vector3 velocity = (transform.forward * Speed + Vector3.up * VelocityY);
         controller.Move(velocity * Time.deltaTime);
-        //Debug.Log(controller.isGrounded);
+        //transform.Rotate(Vector3.right * 360 * Time.deltaTime, Space.Self);
 
         //transform.Translate(Vector3.forward * Speed * Time.fixedDeltaTime);
         if (controller.isGrounded)
@@ -98,7 +99,7 @@ public class Player : MonoBehaviour
             tween.PauseAnim();
             GameManager.Instance.Save();
             hitaudio.PlayOneShot(hit);
-            GameManager.Instance.Player.SetActive(false);
+            //GameManager.Instance.Player.SetActive(false);
             AdManager.Instance.ShowFullScreenAd();
             AdManager.Instance.RequestBanner();
         }

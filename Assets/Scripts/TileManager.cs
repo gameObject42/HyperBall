@@ -11,10 +11,11 @@ public class TileManager : MonoBehaviour
     public int numberOfTiles = 5;
     private List<GameObject> activeTiles = new List<GameObject>();
 
-    public Transform playerTrans;
+    private Transform playerTrans;
 
     private void Start()
     {
+        Invoke("CheckPlayer", 1.0f);
         for(int i =0; i<numberOfTiles; i++)
         {
             if (i == 0)
@@ -28,11 +29,15 @@ public class TileManager : MonoBehaviour
     }
     private void Update()
     {
-        if (playerTrans.position.z - 75 > zSpawn - (numberOfTiles * tileLength))
+        if(playerTrans != null)
         {
-            SpawnTile(Random.Range(1, tilePrefab.Length));
-            DeleteTile();
+            if (playerTrans.position.z - 75 > zSpawn - (numberOfTiles * tileLength))
+            {
+                SpawnTile(Random.Range(1, tilePrefab.Length));
+                DeleteTile();
+            }
         }
+        
     }
     public void SpawnTile(int tileIndex)
     {
@@ -44,5 +49,12 @@ public class TileManager : MonoBehaviour
     {
         Destroy(activeTiles[0]);
         activeTiles.RemoveAt(0);
+    }
+    public void CheckPlayer() 
+    {
+        if(playerTrans == null)
+        {
+            playerTrans = GameObject.FindGameObjectWithTag("Player").transform;
+        }   
     }
 }

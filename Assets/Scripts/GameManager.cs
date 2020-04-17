@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     //public GameObject mainMenu;
     //public GameObject gameOverMenu;
     //public GameObject scoreText;
+    //public GameObject Player;
     public GameObject Player;
     [Header("Int Values")]
     public int scoreCounter = 0;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        Instantiate(Player, new Vector3(0f,2.9f,13f),Quaternion.identity);
         if (PlayerPrefs.HasKey("Music"))
         {
             if (PlayerPrefs.GetInt("Music") == 0)
@@ -146,6 +148,10 @@ public class GameManager : MonoBehaviour
             backMusic.mute = !backMusic.mute;
             PlayerPrefs.SetInt("Music", 1);
         }
+    }
+    public void LoadCharScene()
+    {
+        SceneManager.LoadScene(1);
     }
     /*public void Pause()
     {
