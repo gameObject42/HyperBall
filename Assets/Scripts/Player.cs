@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
         else if (other.gameObject.tag == "Color1")
         {
             ColorCha.ChangeColor();
+            GameManager.Instance.DiamondCounter();
         }
         else if (other.gameObject.tag == "JumpPoint")
         {

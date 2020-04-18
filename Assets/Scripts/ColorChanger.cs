@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ColorChanger : MonoBehaviour
 {
-    private Renderer rend;
     public GameObject[] Obs;
     public Color myColor;
 

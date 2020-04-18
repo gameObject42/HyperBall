@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 
 public class ShareAndRate : MonoBehaviour {
 
-	string subject = "Subject text";
-	string body = "Actual text (Link)";
+	string subject = "Get the new Hyper Casual Game";
+	string body = "https://play.google.com/store/apps/details?id=com.TigerHillGame.HyperBall";
 
 	#if UNITY_IPHONE
 	
@@ -65,10 +65,34 @@ public class ShareAndRate : MonoBehaviour {
 	public void RateUs()
 	{
 		#if UNITY_ANDROID
-		Application.OpenURL("market://details?id=YOUR_ID");
+		Application.OpenURL("https://play.google.com/store/apps/details?id=com.TigerHillGame.HyperBall");
 		#elif UNITY_IPHONE
 		Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_ID");
 		#endif
+	}
+	public void YouTube()
+	{
+#if UNITY_ANDROID
+		Application.OpenURL("https://play.google.com/store/apps/details?id=com.TigerHillGame.HyperBall");
+#elif UNITY_IPHONE
+		Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_ID");
+#endif
+	}
+	public void FaceBook()
+	{
+#if UNITY_ANDROID
+		Application.OpenURL("https://play.google.com/store/apps/details?id=com.TigerHillGame.HyperBall");
+#elif UNITY_IPHONE
+		Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_ID");
+#endif
+	}
+	public void Twitter()
+	{
+#if UNITY_ANDROID
+		Application.OpenURL("https://play.google.com/store/apps/details?id=com.TigerHillGame.HyperBall");
+#elif UNITY_IPHONE
+		Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_ID");
+#endif
 	}
 
 }

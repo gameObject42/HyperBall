@@ -9,19 +9,20 @@ public class GameManager : MonoBehaviour
 {
     [Header("GameObjects")]
     public AudioSource backMusic;
-    //public GameObject pause;
-    //public GameObject mainMenu;
-    //public GameObject gameOverMenu;
-    //public GameObject scoreText;
-    //public GameObject Player;
-    public GameObject Player;
+    public GameObject SettingPanel;
+    public GameObject[] Player;
+
     [Header("Int Values")]
     public int scoreCounter = 0;
     public int hightScoreNum = 0;
+    public int diamondNum = 0;
+
     [Header("UI Elements")]
     public TextMeshProUGUI score;
     public TextMeshProUGUI highScore;
+    public TextMeshProUGUI diamond;
     public Toggle soundBtn;
+
     [Header("Boolean")]
     public bool startGame = false;
     private bool bestbool = true;
@@ -43,7 +44,16 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        Instantiate(Player, new Vector3(0f,2.9f,13f),Quaternion.identity);
+        if (PlayerPrefs.HasKey("Char"))
+        {
+            CharLoader();
+        }
+        else
+        {
+            Instantiate(Player[0], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+            PlayerPrefs.SetInt("Char", 0);
+        }
+        
         if (PlayerPrefs.HasKey("Music"))
         {
             if (PlayerPrefs.GetInt("Music") == 0)
@@ -62,14 +72,19 @@ public class GameManager : MonoBehaviour
         
         hightScoreNum = PlayerPrefs.GetInt("Score", scoreCounter);
         highScore.text = "Best Score : " + hightScoreNum.ToString();
+
+        diamondNum = PlayerPrefs.GetInt("Diamond", diamondNum);
+        diamond.text = diamondNum.ToString();
+
         tween = FindObjectOfType<Tweening>();
 
-        AdManager.Instance.RequestBanner();
+        //AdManager.Instance.RequestBanner();
         
     }
     private void Update()
     {
         score.text = scoreCounter.ToString();
+        diamond.text = diamondNum.ToString();
         newBestScoreCheck();
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -100,6 +115,10 @@ public class GameManager : MonoBehaviour
     public void ScoreCounter()
     {
         scoreCounter++;
+    }
+    public void DiamondCounter() {
+        diamondNum += 5;
+        PlayerPrefs.SetInt("Diamond", diamondNum);
     }
     public void Save() 
     {
@@ -152,6 +171,32 @@ public class GameManager : MonoBehaviour
     public void LoadCharScene()
     {
         SceneManager.LoadScene(1);
+    }
+    public void CharLoader()
+    {
+        switch (PlayerPrefs.GetInt("Char"))
+        {
+            case 1:
+                Instantiate(Player[1], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(Player[2], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 3:
+                Instantiate(Player[3], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            default:
+                Instantiate(Player[0], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+        }
+    }
+    public void Setting() 
+    {
+        SettingPanel.SetActive(true);
+    }
+    public void SettingToMenu()
+    {
+        SettingPanel.SetActive(false);
     }
     /*public void Pause()
     {
