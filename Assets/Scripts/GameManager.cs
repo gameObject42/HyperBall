@@ -100,11 +100,11 @@ public class GameManager : MonoBehaviour
         //mainMenu.SetActive(false);
         //scoreText.SetActive(true);
         tween.InitialPos();
-        AdManager.Instance.HideBanner();
+        //AdManager.Instance.HideBanner();
     }
     public void reStartGame()
     {
-        AdManager.Instance.HideBanner();
+        //AdManager.Instance.HideBanner();
         Invoke("reloadScene", 0.3f);
     }
     public void reloadScene()

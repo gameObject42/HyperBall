@@ -15,6 +15,11 @@ public class CharacterSelector : MonoBehaviour
         diamondcount = PlayerPrefs.GetInt("Diamond");
         diamonds.text = diamondcount.ToString();
     }
+    private void Update()
+    {
+        diamondcount = PlayerPrefs.GetInt("Diamond");
+        diamonds.text = diamondcount.ToString();
+    }
     public void Char01()
     {
 
@@ -34,5 +39,9 @@ public class CharacterSelector : MonoBehaviour
     public void LoadGameScene() 
     {
         SceneManager.LoadScene(0);
+    }
+    public void GetDiamonds() 
+    {
+        AdManager.Instance.AdClickedShop();
     }
 }

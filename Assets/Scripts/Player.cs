@@ -42,10 +42,12 @@ public class Player : MonoBehaviour
             GameManager.Instance.startGame = false;
             tween.PauseAnim();
             GameManager.Instance.Save();
-            hitaudio.PlayOneShot(hit);
+            //tween.RewadesAdPanelShow();
+            //hitaudio.PlayOneShot(hit);
             //GameManager.Instance.Player.SetActive(false);
-            AdManager.Instance.RequestBanner();
+            //AdManager.Instance.RequestBanner();
         }
+        ShowRewardedAd();
     }
     private void FixedUpdate()
     {
@@ -98,10 +100,11 @@ public class Player : MonoBehaviour
             GameManager.Instance.startGame = false;
             tween.PauseAnim();
             GameManager.Instance.Save();
-            hitaudio.PlayOneShot(hit);
+            isDead = true;
+            //hitaudio.PlayOneShot(hit);
             //GameManager.Instance.Player.SetActive(false);
-            AdManager.Instance.ShowFullScreenAd();
-            AdManager.Instance.RequestBanner();
+            //AdManager.Instance.ShowFullScreenAd();
+            //AdManager.Instance.RequestBanner();
         }
         else if(other.gameObject.tag == "Points")
         {
@@ -140,5 +143,12 @@ public class Player : MonoBehaviour
             ColorCha.ChangeColor();
         }*/
 
+    }
+    public void ShowRewardedAd()
+    {
+        if(isDead==true && GameManager.Instance.scoreCounter >= GameManager.Instance.hightScoreNum)
+        {
+            tween.RewadesAdPanelShow();
+        }
     }
 }

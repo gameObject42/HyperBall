@@ -73,7 +73,7 @@ public class ShareAndRate : MonoBehaviour {
 	public void YouTube()
 	{
 #if UNITY_ANDROID
-		Application.OpenURL("https://play.google.com/store/apps/details?id=com.TigerHillGame.HyperBall");
+		Application.OpenURL("https://www.youtube.com/channel/UC5vPn-gG4B69FvgBgwnEM4w");
 #elif UNITY_IPHONE
 		Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_ID");
 #endif
@@ -81,7 +81,7 @@ public class ShareAndRate : MonoBehaviour {
 	public void FaceBook()
 	{
 #if UNITY_ANDROID
-		Application.OpenURL("https://play.google.com/store/apps/details?id=com.TigerHillGame.HyperBall");
+		Application.OpenURL("https://www.facebook.com/TigerHillGames");
 #elif UNITY_IPHONE
 		Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_ID");
 #endif
@@ -89,7 +89,7 @@ public class ShareAndRate : MonoBehaviour {
 	public void Twitter()
 	{
 #if UNITY_ANDROID
-		Application.OpenURL("https://play.google.com/store/apps/details?id=com.TigerHillGame.HyperBall");
+		Application.OpenURL("https://twitter.com/TigerhillG");
 #elif UNITY_IPHONE
 		Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_ID");
 #endif

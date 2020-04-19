@@ -14,6 +14,7 @@ public class Tweening : MonoBehaviour
     [SerializeField] private GameObject bestScore;
     [Header("Game Over UI")]
     [SerializeField] private GameObject RestartBtn;
+    [SerializeField] private GameObject RewardedAdPanel;
     /*[SerializeField] private GameObject GsettingBtn;
     [SerializeField] private GameObject GshareBtn;
     [SerializeField] private GameObject Gtitle;*/
@@ -73,5 +74,13 @@ public class Tweening : MonoBehaviour
     public void shareAnimup()
     {
         LeanTween.moveY(Sharebtn.GetComponent<RectTransform>(), 0f, 0.3f).setEase(easytype);
+    }
+    public void RewadesAdPanelShow()
+    {
+        LeanTween.moveX(RewardedAdPanel.GetComponent<RectTransform>(), 0f, 0.3f).setDelay(0.3f).setEase(easytype);
+    }
+    public void RewadesAdPanelhide()
+    {
+        LeanTween.moveX(RewardedAdPanel.GetComponent<RectTransform>(), -560f, 0.3f).setDelay(0.3f).setEase(easytype);
     }
 }
