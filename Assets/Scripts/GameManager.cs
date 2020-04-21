@@ -185,6 +185,39 @@ public class GameManager : MonoBehaviour
             case 3:
                 Instantiate(Player[3], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
                 break;
+            case 4:
+                Instantiate(Player[4], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 5:
+                Instantiate(Player[5], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 6:
+                Instantiate(Player[6], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 7:
+                Instantiate(Player[7], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 8:
+                Instantiate(Player[8], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 9:
+                Instantiate(Player[9], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 10:
+                Instantiate(Player[10], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 11:
+                Instantiate(Player[11], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 12:
+                Instantiate(Player[12], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 13:
+                Instantiate(Player[13], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
+            case 15:
+                Instantiate(Player[14], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
+                break;
             default:
                 Instantiate(Player[0], new Vector3(0f, 2.9f, 13f), Quaternion.identity);
                 break;

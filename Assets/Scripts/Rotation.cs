@@ -8,7 +8,7 @@ public class Rotation : MonoBehaviour
     {
         if (GameManager.Instance.startGame == true)
         {
-            transform.Rotate(Vector3.right * 460 * Time.deltaTime, Space.Self);
+            transform.Rotate(Vector3.right * 860 * Time.deltaTime, Space.Self);
         }
     }
 }

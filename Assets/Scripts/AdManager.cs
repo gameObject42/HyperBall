@@ -24,7 +24,7 @@ public class AdManager : MonoBehaviour
 
     public Button adBtn;
 
-    public Tweening tween;
+    private Tweening tween;
     private void Awake()
     {
         if(Instance == null)
@@ -75,19 +75,13 @@ public class AdManager : MonoBehaviour
         int diamond = GameManager.Instance.diamondNum + 100;
         int diamondPlus = diamond;
         PlayerPrefs.SetInt("Diamond", diamondPlus);
-        GameManager.Instance.diamondNum += 100;
         tween.RewadesAdPanelhide();
-        Debug.Log("100");
-        /*int points = int.Parse(TxtPoints.text);
-        points += 50; //add 50 points
-        TxtPoints.text = points.ToString();*/
     }
 
     public void HandleOnRewardedAdClosed(object sender, EventArgs args)
     {//ad closed (even if not finished watching)
         adBtn.interactable = true;
-        adBtn.GetComponentInChildren<Text>().text = "Watch";
-        Debug.Log("not");
+        adBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Watch";
         rewardedAd.OnAdLoaded -= this.HandleOnRewardedAdLoaded;
         rewardedAd.OnAdRewarded -= this.HandleOnAdRewarded;
         rewardedAd.OnAdClosed -= this.HandleOnRewardedAdClosed;
@@ -104,7 +98,6 @@ public class AdManager : MonoBehaviour
     {
         RequestRewardedAd();
 
-        Debug.Log("Clicked");
     }
     AdRequest AdRequestBuild()
     {

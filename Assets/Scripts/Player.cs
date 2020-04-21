@@ -5,9 +5,9 @@ using UnityEngine.Audio;
 
 public class Player : MonoBehaviour
 {
-    public float Speed;
-    public float acc;
-    public float topSpeed;
+    private float Speed = 30.0f;
+    private float acc;
+    private float topSpeed = 40.0f;
     public float jumpHeight;
     public float touchSpeed = 0.01f;
     public float gravity;
