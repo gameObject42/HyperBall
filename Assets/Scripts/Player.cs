@@ -8,12 +8,10 @@ public class Player : MonoBehaviour
     private float Speed = 30.0f;
     private float acc;
     private float topSpeed = 40.0f;
-    public float jumpHeight;
+    private float jumpHeight = 3.2f;
     public float touchSpeed = 0.01f;
-    public float gravity;
+    private float gravity = -200;
 
-
-    //private Rigidbody rigid;
     private Touch touchInput;
     private float VelocityY;
     public AudioSource hitaudio;
@@ -23,6 +21,7 @@ public class Player : MonoBehaviour
     private ColorChanger ColorCha;
 
     private bool isDead = false;
+    private bool deadOnce = false;
 
     private CharacterController controller;
 
@@ -30,24 +29,22 @@ public class Player : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        //rigid = GetComponent<Rigidbody>();
         tween = FindObjectOfType<Tweening>();
         ColorCha = FindObjectOfType<ColorChanger>();
     }
     private void Update()
     {
-        if (transform.position.y < -2)
+        if (transform.position.y < -2 && deadOnce == false)
         {
             isDead = true;
             GameManager.Instance.startGame = false;
             tween.PauseAnim();
             GameManager.Instance.Save();
-            //tween.RewadesAdPanelShow();
-            //hitaudio.PlayOneShot(hit);
-            //GameManager.Instance.Player.SetActive(false);
-            //AdManager.Instance.RequestBanner();
+            GameManager.Instance.DeadTracker();
+            deadOnce = true;
+            ShowRewardedAd();
+            hitaudio.PlayOneShot(hit);
         }
-        ShowRewardedAd();
     }
     private void FixedUpdate()
     {
@@ -60,9 +57,6 @@ public class Player : MonoBehaviour
         VelocityY += Time.deltaTime * gravity;
         Vector3 velocity = (transform.forward * Speed + Vector3.up * VelocityY);
         controller.Move(velocity * Time.deltaTime);
-        //transform.Rotate(Vector3.right * 360 * Time.deltaTime, Space.Self);
-
-        //transform.Translate(Vector3.forward * Speed * Time.fixedDeltaTime);
         if (controller.isGrounded)
         {
             VelocityY = 0;
@@ -81,30 +75,19 @@ public class Player : MonoBehaviour
             Speed += Time.deltaTime + acc;
         }
         transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * 10 * Time.fixedDeltaTime);
-
-        /*if (Input.GetKey(KeyCode.Space))
-        {
-            if (controller.isGrounded)
-            {
-                float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
-                VelocityY = jumpVelocity;
-            }
-        }*/
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Obstacles")
+        if (other.gameObject.tag == "Obstacle")
         {
-            //GameManager.Instance.gameOverMenu.SetActive(true);
             GameManager.Instance.startGame = false;
             tween.PauseAnim();
             GameManager.Instance.Save();
             isDead = true;
-            //hitaudio.PlayOneShot(hit);
-            //GameManager.Instance.Player.SetActive(false);
-            //AdManager.Instance.ShowFullScreenAd();
-            //AdManager.Instance.RequestBanner();
+            ShowRewardedAd();
+            GameManager.Instance.DeadTracker();
+            hitaudio.PlayOneShot(hit);
         }
         else if(other.gameObject.tag == "Points")
         {
@@ -123,32 +106,13 @@ public class Player : MonoBehaviour
                 VelocityY = jumpVelocity;
             }
         }
-        /*else if (other.gameObject.tag == "JumpDown")
-        {
-            rigid.velocity += Vector3.down * jumpForce;
-        }*/
-
-
-
-        /*else
-        {
-            if (other.gameObject.tag == "Points")
-            {
-                GameManager.Instance.ScoreCounter();
-            }
-        }
-        if (other.gameObject.tag == "Color1")
-        {
-            //GameManager.Instance.gameOverMenu.SetActive(true);
-            ColorCha.ChangeColor();
-        }*/
-
     }
     public void ShowRewardedAd()
     {
-        if(isDead==true && GameManager.Instance.scoreCounter >= GameManager.Instance.hightScoreNum)
+        if (isDead == true && GameManager.Instance.scoreCounter >= GameManager.Instance.hightScoreNum && Application.internetReachability != NetworkReachability.NotReachable)
         {
             tween.RewadesAdPanelShow();
+            Debug.Log("Reached");
         }
     }
 }

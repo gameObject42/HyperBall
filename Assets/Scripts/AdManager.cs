@@ -17,7 +17,7 @@ public class AdManager : MonoBehaviour
     private string bannerID = ""; //"ca-app-pub-5427174806272358/1538629290"; //"ca-app-pub-3940256099942544/6300978111";
 
     private InterstitialAd fullScreenAd;
-    private string fullScreenAdID = "";//"ca-app-pub-5427174806272358/9772342530"; //"ca-app-pub-3940256099942544/1033173712";
+    private string fullScreenAdID = "ca-app-pub-3940256099942544/1033173712";//"ca-app-pub-5427174806272358/9772342530"; //"ca-app-pub-3940256099942544/1033173712";
 
     private RewardBasedVideoAd rewardedAd;
     private string VideoAdID = "ca-app-pub-3940256099942544/5224354917";
@@ -38,8 +38,6 @@ public class AdManager : MonoBehaviour
     }
     private void Start()
     {
-        /*appID = "ca-app-pub-3940256099942544~3347511713";
-        VideoAdID = "ca-app-pub-3940256099942544/5224354917";*/
         MobileAds.Initialize(appID);
         RequestFullScreenAd();
         rewardedAd = RewardBasedVideoAd.Instance;
@@ -65,21 +63,20 @@ public class AdManager : MonoBehaviour
         Debug.Log("Show");
     }
     public void HandleOnRewardedAdLoaded(object sender, EventArgs args)
-    {//ad loaded
+    {
         ShowRewardAd();
-
     }
 
     public void HandleOnAdRewarded(object sender, EventArgs args)
-    {//user finished watching ad
-        int diamond = GameManager.Instance.diamondNum + 100;
+    {
+        int diamond = GameManager.Instance.diamondNum + 500;
         int diamondPlus = diamond;
         PlayerPrefs.SetInt("Diamond", diamondPlus);
         tween.RewadesAdPanelhide();
     }
 
     public void HandleOnRewardedAdClosed(object sender, EventArgs args)
-    {//ad closed (even if not finished watching)
+    {
         adBtn.interactable = true;
         adBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Watch";
         rewardedAd.OnAdLoaded -= this.HandleOnRewardedAdLoaded;

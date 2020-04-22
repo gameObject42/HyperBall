@@ -7,15 +7,12 @@ using TMPro;
 
 public class CharacterSelector : MonoBehaviour
 {
-    public TextMeshProUGUI diamonds;
-    private int diamondcount;
-
-    public LeanTweenType easytype;
-
     public GameObject SelectedPlayer;
     public GameObject AdPanel;
-    //public GameObject[] PriceContainer;
+    public TextMeshProUGUI diamonds;
+    private int diamondcount;
     public Material[] mat;
+    public LeanTweenType easytype;
 
     private void Start()
     {

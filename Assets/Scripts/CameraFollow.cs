@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-
-    //8,9.5,-9    13,-18
-    //public GameObject player;
     private Transform player;
     private Vector3 offset;
 
@@ -14,17 +11,13 @@ public class CameraFollow : MonoBehaviour
     public float smoothNes;
 
     public bool lookAtPlayer = false;
-    // Start is called before the first frame update
     void Start()
     {
-        Invoke("Checks", 1.0f);
-        
+        StartCoroutine(Checks());   
     }
-
-    // Update is called once per frame
     void LateUpdate()
     {
-        if(player != null)
+        if (player != null)
         {
             Vector3 newPos = player.position + offset;
             transform.position = Vector3.Slerp(transform.position, newPos, smoothNes);
@@ -34,12 +27,17 @@ public class CameraFollow : MonoBehaviour
             }
         }
     }
-    public void Checks()
+    IEnumerator Checks()
     {
+        yield return new WaitForSeconds(1);
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
             offset = transform.position - player.position;
         }
+    }
+    IEnumerator follow() {
+
+        yield return new WaitForSeconds(1);
     }
 }

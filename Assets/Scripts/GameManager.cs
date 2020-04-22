@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int scoreCounter = 0;
     public int hightScoreNum = 0;
     public int diamondNum = 0;
+    public int deadtracker = 0;
 
     [Header("UI Elements")]
     public TextMeshProUGUI score;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     [Header("Boolean")]
     public bool startGame = false;
     private bool bestbool = true;
+    private bool showInstAd = false;
 
     private Tweening tween;
 
@@ -77,9 +79,6 @@ public class GameManager : MonoBehaviour
         diamond.text = diamondNum.ToString();
 
         tween = FindObjectOfType<Tweening>();
-
-        //AdManager.Instance.RequestBanner();
-        
     }
     private void Update()
     {
@@ -89,22 +88,16 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape))
         {
             QuitDropDrown();
-            /*pause.SetActive(true);
-            Time.timeScale = 1;*/
         }
+        
     }
     public void setGametoTrue()
     {
-        //Debug.Log("Hi");
         startGame = true;
-        //mainMenu.SetActive(false);
-        //scoreText.SetActive(true);
         tween.InitialPos();
-        //AdManager.Instance.HideBanner();
     }
     public void reStartGame()
     {
-        //AdManager.Instance.HideBanner();
         Invoke("reloadScene", 0.3f);
     }
     public void reloadScene()
@@ -226,14 +219,24 @@ public class GameManager : MonoBehaviour
     public void Setting() 
     {
         SettingPanel.SetActive(true);
+        AdManager.Instance.ShowFullScreenAd();
     }
     public void SettingToMenu()
     {
         SettingPanel.SetActive(false);
     }
-    /*public void Pause()
+    public void DeadTracker() 
     {
-        Time.timeScale = 0.0f;
-        pause.SetActive(false);
-    }*/
+        if (PlayerPrefs.GetInt("deadTracker") >= 3)
+        {
+            PlayerPrefs.SetInt("deadTracker", 0);
+            AdManager.Instance.ShowFullScreenAd();
+            Debug.Log("ShowAd");
+        }
+        else
+        {
+            deadtracker = PlayerPrefs.GetInt("deadTracker") + 1;
+            PlayerPrefs.SetInt("deadTracker", deadtracker);
+        }
+    }
 }
