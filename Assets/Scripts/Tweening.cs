@@ -29,8 +29,8 @@ public class Tweening : MonoBehaviour
         LeanTween.moveY(PlayBtn.GetComponent<RectTransform>(), 102f, 0.3f).setDelay(0.3f).setEase(easytype);
         LeanTween.moveY(SettingBtn.GetComponent<RectTransform>(), 120f, 0.5f).setDelay(0.3f).setEase(easytype);
         LeanTween.moveY(ShareBtn.GetComponent<RectTransform>(), 120f, 0.5f).setDelay(0.3f).setEase(easytype);
-        LeanTween.moveY(title.GetComponent<RectTransform>(), -145f, 0.5f).setDelay(0.3f).setEase(easytype);
-        LeanTween.moveY(bestScore.GetComponent<RectTransform>(), -210f, 0.5f).setDelay(0.3f).setEase(easytype);
+        LeanTween.moveY(title.GetComponent<RectTransform>(), -80f, 0.5f).setDelay(0.3f).setEase(easytype);
+        LeanTween.moveY(bestScore.GetComponent<RectTransform>(), -145f, 0.5f).setDelay(0.3f).setEase(easytype);
     }
     private void Update()
     {

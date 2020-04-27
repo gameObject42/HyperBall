@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using TMPro;
@@ -11,16 +9,16 @@ public class AdManager : MonoBehaviour
 {
     public static AdManager Instance;
 
-    private string appID = "ca-app-pub-3940256099942544~3347511713";//"ca-app-pub-5427174806272358~4537092066"; //"ca-app-pub-3940256099942544~3347511713"; Tesdid
+    private string appID = "ca-app-pub-5427174806272358~4537092066";//"ca-app-pub-5427174806272358~4537092066"; //"ca-app-pub-3940256099942544~3347511713"; Tesdid
 
     private BannerView bannerView;
     private string bannerID = ""; //"ca-app-pub-5427174806272358/1538629290"; //"ca-app-pub-3940256099942544/6300978111";
 
     private InterstitialAd fullScreenAd;
-    private string fullScreenAdID = "ca-app-pub-3940256099942544/1033173712";//"ca-app-pub-5427174806272358/9772342530"; //"ca-app-pub-3940256099942544/1033173712";
+    private string fullScreenAdID = "ca-app-pub-5427174806272358/9772342530";//"ca-app-pub-5427174806272358/9772342530"; //"ca-app-pub-3940256099942544/1033173712";
 
     private RewardBasedVideoAd rewardedAd;
-    private string VideoAdID = "ca-app-pub-3940256099942544/5224354917";
+    private string VideoAdID = "ca-app-pub-5427174806272358/2509526659";
 
     public Button adBtn;
 
@@ -69,10 +67,10 @@ public class AdManager : MonoBehaviour
 
     public void HandleOnAdRewarded(object sender, EventArgs args)
     {
-        int diamond = GameManager.Instance.diamondNum + 500;
+        int diamond = GameManager.Instance.diamondNum + 100;
         int diamondPlus = diamond;
         PlayerPrefs.SetInt("Diamond", diamondPlus);
-        tween.RewadesAdPanelhide();
+        SceneManager.LoadScene(0);
     }
 
     public void HandleOnRewardedAdClosed(object sender, EventArgs args)

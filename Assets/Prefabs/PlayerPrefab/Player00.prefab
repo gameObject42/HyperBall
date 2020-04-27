@@ -46,13 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228a82bf2857ed44589903a03726a091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 20
-  acc: 0
-  topSpeed: 40
-  jumpHeight: 3
   touchSpeed: 0.01
-  gravity: -80
-  hitaudio: {fileID: 977777161682564201, guid: 2f63b8b98ea9e514abe27300b6b51b4b, type: 3}
+  hitaudio: {fileID: 0}
   hit: {fileID: 8300000, guid: 88f5a254e4b00ff4dbabe74e5fd7fd67, type: 3}
 --- !u!143 &7763791296522236313
 CharacterController:

@@ -14,16 +14,13 @@ public class Player : MonoBehaviour
 
     private Touch touchInput;
     private float VelocityY;
-    public AudioSource hitaudio;
-    public AudioClip hit;
 
     private Tweening tween;
     private ColorChanger ColorCha;
 
-    private bool isDead = false;
-    private bool deadOnce = false;
-
     private CharacterController controller;
+
+    public bool isDead = false;
 
     private Vector3 target = new Vector3(0.0f, 0.0f, 0.0f);
     private void Start()
@@ -34,16 +31,16 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        if (transform.position.y < -2 && deadOnce == false)
+        if (transform.position.y < -2 && isDead == false)
         {
             isDead = true;
             GameManager.Instance.startGame = false;
             tween.PauseAnim();
             GameManager.Instance.Save();
             GameManager.Instance.DeadTracker();
-            deadOnce = true;
+            GameManager.Instance.DeadAudio();
             ShowRewardedAd();
-            hitaudio.PlayOneShot(hit);
+            Debug.Log("Dead");
         }
     }
     private void FixedUpdate()
@@ -85,9 +82,10 @@ public class Player : MonoBehaviour
             tween.PauseAnim();
             GameManager.Instance.Save();
             isDead = true;
+            GameManager.Instance.DeadAudio();
             ShowRewardedAd();
             GameManager.Instance.DeadTracker();
-            hitaudio.PlayOneShot(hit);
+            
         }
         else if(other.gameObject.tag == "Points")
         {

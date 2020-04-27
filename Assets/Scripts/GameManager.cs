@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
 {
     [Header("GameObjects")]
     public AudioSource backMusic;
+    public AudioSource hitaudio;
+    public AudioClip hit;
     public GameObject SettingPanel;
     public GameObject[] Player;
+    public GameObject pauseBtn;
+    
 
     [Header("Int Values")]
     public int scoreCounter = 0;
@@ -27,7 +31,6 @@ public class GameManager : MonoBehaviour
     [Header("Boolean")]
     public bool startGame = false;
     private bool bestbool = true;
-    private bool showInstAd = false;
 
     private Tweening tween;
 
@@ -227,16 +230,19 @@ public class GameManager : MonoBehaviour
     }
     public void DeadTracker() 
     {
-        if (PlayerPrefs.GetInt("deadTracker") >= 3)
+        if (PlayerPrefs.GetInt("deadTracker") >= 2)
         {
             PlayerPrefs.SetInt("deadTracker", 0);
             AdManager.Instance.ShowFullScreenAd();
-            Debug.Log("ShowAd");
         }
         else
         {
             deadtracker = PlayerPrefs.GetInt("deadTracker") + 1;
             PlayerPrefs.SetInt("deadTracker", deadtracker);
         }
+    }
+    public void DeadAudio()
+    {
+        hitaudio.PlayOneShot(hit);
     }
 }
